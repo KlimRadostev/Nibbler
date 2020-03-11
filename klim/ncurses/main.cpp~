@@ -1,0 +1,46 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   main.cpp                                           :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: kradoste <marvin@42.fr>                    +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2020/03/10 12:12:01 by kradoste          #+#    #+#             //
+//   Updated: 2020/03/10 13:23:28 by kradoste         ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
+#include <curses.h>
+
+//compile ncurses with -lncurses tag
+
+void	init(int h, int w)
+{
+	mvhline(1, 1, 'X', w);
+	mvhline(h, 1, 'X', w);
+	mvvline(1, 1, 'X', h);
+	mvvline(1, w, 'X', h);
+}
+
+int main()
+{
+	initscr();
+	noecho();
+
+	curs_set(FALSE);
+	keypad(stdscr, TRUE);
+	cbreak();
+
+	clear();
+
+	init(10, 25);
+
+
+	int ch;
+	do {
+		ch = getch();
+	} while ((ch != 'q') && (ch != 'Q'));
+	
+	endwin();
+	return (0);
+}
